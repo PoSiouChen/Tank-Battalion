@@ -6,9 +6,12 @@ using UnityEngine.UIElements.Experimental;
 public class Enemy : MonoBehaviour
 {
     [Header("Value")]
-    [SerializeField] private float moveSpace = 4f;
+    [SerializeField] private float moveSpace = 1f;
     [SerializeField] private float limitBulletTime = 0.2f;
+    [SerializeField] private float limitDirectionTime = 3f;
     private float currentBulletTime = 0;
+    private float currentDirectionTime = 0;
+    private int currentDirection;
     private Vector3 bulletEuler;
 
     
@@ -20,7 +23,8 @@ public class Enemy : MonoBehaviour
     [SerializeField] private GameObject explode;
     
     private void Awake() {
-        sr = GetComponent<SpriteRenderer>();    
+        sr = GetComponent<SpriteRenderer>();
+        currentDirection = Random.Range(0, 4);    
     }
     void Start()
     {
@@ -36,29 +40,39 @@ public class Enemy : MonoBehaviour
         {
             currentBulletTime = currentBulletTime + Time.deltaTime;
         }
+
+        
     }
 
     private void FixedUpdate() {
-        Move();
+        if(currentDirectionTime >= limitDirectionTime)
+        {
+            ChangeDirection();
+            Move();
+        }else
+        {
+            currentDirectionTime = currentDirectionTime + Time.deltaTime;
+            Move();
+        }
     }
 
     private void Move()
     {
-        if(Input.GetKey(KeyCode.UpArrow))
+        if(currentDirection == 0)
         {
             sr.sprite = tankSprite[0];
             bulletEuler = new Vector3(0, 0, 0);
             transform.Translate(0, moveSpace * Time.fixedDeltaTime, 0);
-        }else if(Input.GetKey(KeyCode.RightArrow))
+        }else if(currentDirection == 1)
         {
             sr.sprite = tankSprite[1];
             bulletEuler = new Vector3(0, 0, -90);
             transform.Translate(moveSpace * Time.fixedDeltaTime, 0, 0);
-        }else if(Input.GetKey(KeyCode.DownArrow)){
+        }else if(currentDirection == 2){
             sr.sprite = tankSprite[2];
             bulletEuler = new Vector3(0, 0, 180);
             transform.Translate(0, -moveSpace * Time.fixedDeltaTime, 0);
-        }else if(Input.GetKey(KeyCode.LeftArrow))
+        }else if(currentDirection == 3)
         {
             sr.sprite = tankSprite[3];
             bulletEuler = new Vector3(0, 0, 90);
@@ -66,13 +80,18 @@ public class Enemy : MonoBehaviour
         }
     }
 
+    private void ChangeDirection()
+    {
+        currentDirection = Random.Range(0, 4);
+        currentDirectionTime = 0;
+    }
+
     private void Attack()
     {
-        if(Input.GetKey(KeyCode.Space))
-        {
-            Instantiate(bullet, transform.position, Quaternion.Euler(transform.eulerAngles + bulletEuler));
-            currentBulletTime = 0;
-        }
+
+        Instantiate(bullet, transform.position, Quaternion.Euler(transform.eulerAngles + bulletEuler));
+        currentBulletTime = 0;
+
     }
 
     private void Die()
