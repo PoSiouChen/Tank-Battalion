@@ -24,6 +24,7 @@ public class Bullet : MonoBehaviour
                 if(!isPlayerBullet)
                 {
                     collision.SendMessage("Die");
+                    Destroy(gameObject);
                 }
                 break;
             case "grass":
@@ -38,6 +39,11 @@ public class Bullet : MonoBehaviour
                 Destroy(gameObject);
                 break;
             case "enemy":
+                if(isPlayerBullet)
+                {
+                    collision.SendMessage("Die");
+                    Destroy(gameObject);
+                }
                 break;
             case "heart":
                 collision.SendMessage("Die");

@@ -107,6 +107,7 @@ MonoBehaviour:
   - {fileID: -3408678, guid: 9d7c74611c8251f4ba21ad8a4bbd5bbd, type: 3}
   - {fileID: -720171868, guid: 9d7c74611c8251f4ba21ad8a4bbd5bbd, type: 3}
   bullet: {fileID: 3060251390084865579, guid: d0420d4f8f91ed248ad6bd0958c8508a, type: 3}
+  explode: {fileID: 2726411469442058076, guid: 4a950279c48d53f4cbcf6d0600d51b63, type: 3}
 --- !u!50 &-5619692328405828417
 Rigidbody2D:
   serializedVersion: 4
