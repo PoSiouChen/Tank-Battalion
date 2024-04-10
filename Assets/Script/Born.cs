@@ -11,6 +11,7 @@ public class Born : MonoBehaviour
     [SerializeField] private GameObject player;
     void Start()
     {
+        //動畫持續animationTime後，把動畫體換成坦克
         Invoke("BornTank", animationTime);
         Destroy(gameObject, animationTime);
     }
@@ -20,7 +21,7 @@ public class Born : MonoBehaviour
 
     }
 
-    private void BornTank()
+    private void BornTank() //產生坦克
     {
         Instantiate(player, transform.position, transform.rotation);
     }

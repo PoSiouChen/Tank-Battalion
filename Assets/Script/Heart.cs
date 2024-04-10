@@ -12,6 +12,7 @@ public class Heart : MonoBehaviour
     
     void Start()
     {
+        //拿到heart死掉後的圖片
         sr = GetComponent<SpriteRenderer>();
     }
 
@@ -20,7 +21,7 @@ public class Heart : MonoBehaviour
         
     }
 
-    private void Die()
+    private void Die() //heart被打到，替換成死掉後的圖片
     {
         sr.sprite = heartDie;
         Instantiate(explode, transform.position, transform.rotation);

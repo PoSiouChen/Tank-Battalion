@@ -29,6 +29,7 @@ public class Player : MonoBehaviour
 
     void Update()
     {
+        //限制每次發子彈的間隔時間
         if(currentBulletTime >= limitBulletTime)
         {
             Attack();
@@ -42,7 +43,7 @@ public class Player : MonoBehaviour
         Move();
     }
 
-    private void Move()
+    private void Move() //玩家移動
     {
         if(Input.GetKey(KeyCode.UpArrow))
         {
@@ -54,7 +55,8 @@ public class Player : MonoBehaviour
             sr.sprite = tankSprite[1];
             bulletEuler = new Vector3(0, 0, -90);
             transform.Translate(moveSpace * Time.fixedDeltaTime, 0, 0);
-        }else if(Input.GetKey(KeyCode.DownArrow)){
+        }else if(Input.GetKey(KeyCode.DownArrow))
+        {
             sr.sprite = tankSprite[2];
             bulletEuler = new Vector3(0, 0, 180);
             transform.Translate(0, -moveSpace * Time.fixedDeltaTime, 0);
@@ -66,7 +68,7 @@ public class Player : MonoBehaviour
         }
     }
 
-    private void Attack()
+    private void Attack() //按空白鍵發子彈
     {
         if(Input.GetKey(KeyCode.Space))
         {
@@ -75,7 +77,7 @@ public class Player : MonoBehaviour
         }
     }
 
-    private void Die()
+    private void Die() //被敵人打到
     {
         Instantiate(explode, transform.position, transform.rotation);
         Destroy(gameObject);

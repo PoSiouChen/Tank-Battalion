@@ -7,15 +7,17 @@ public class Scene1 : MonoBehaviour
     [Header("Object")]
     [SerializeField] private GameObject heart;
     [SerializeField] private GameObject[] material;
-    //private List<(float, float)> allPosition = new List<(float, float)>();
+    [SerializeField] private GameObject bigBrick;
     private float brickWidth = 0.32f;
-    private void Awake() {
-
+    private float bigBrickWidth = 0.64f;
+    private void Awake() 
+    {
         creatHeart();
         creatScene();
     }
 
-    private void creatHeart(){
+    private void creatHeart() //產生heart，跟圍住heart的牆
+    {
         Instantiate(heart, new Vector3(0, -4.7f, 0), transform.rotation);
 
         for(float i = -4.84f; i < -4.84f + 4*brickWidth; i += brickWidth) 
@@ -27,14 +29,24 @@ public class Scene1 : MonoBehaviour
             Instantiate(material[0], new Vector3(0.8f, i, 0), transform.rotation);
         }
 
-        for(float i = -0.16f; i < -0.16f + 2*brickWidth; i += brickWidth){
+        for(float i = -0.16f; i < -0.16f + 2*brickWidth; i += brickWidth)
+        {
             Instantiate(material[0], new Vector3(i, -4.2f, 0), transform.rotation); //內row 2塊
             Instantiate(material[0], new Vector3(i, -3.88f, 0), transform.rotation); //外row 2塊
         }   
     }
 
-    private void creatScene(){
-        
+    private void creatScene()
+    {
+        for(float i = -2.14f; i < -2.14f + 4*bigBrickWidth; i += bigBrickWidth)
+        {
+            Instantiate(bigBrick, new Vector3(-1.8f, i, 0), transform.rotation);
+            Instantiate(bigBrick, new Vector3(-3.1f, i, 0), transform.rotation); 
+
+            Instantiate(bigBrick, new Vector3(2.1f, i, 0), transform.rotation);
+            Instantiate(bigBrick, new Vector3(3.4f, i, 0), transform.rotation); 
+            
+        }
         
     }
 

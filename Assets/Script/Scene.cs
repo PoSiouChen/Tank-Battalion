@@ -19,7 +19,8 @@ public class Scene : MonoBehaviour
     private List<(float, float)> allPosition = new List<(float, float)>(); 
 
 
-    private void Awake() {
+    private void Awake() 
+    {
         for(float i = -4.84f; i <= 4.84f; i += 0.32f)
         {
             for(float j = -4.84f; j <= 4.84f; j += 0.32f)
@@ -35,7 +36,8 @@ public class Scene : MonoBehaviour
         creatScene();
     }
 
-    private void creatHeart(){
+    private void creatHeart()
+    {
         Instantiate(heart, new Vector3(0, -4.7f, 0), transform.rotation);
         //randomMaterial = Random.Range(0, 3);
         for(float i = -4.84f; i < -3.88f; i += 0.32f)
@@ -46,7 +48,8 @@ public class Scene : MonoBehaviour
         for(float i = -0.16f; i < 0.48f; i += 0.32f)
             Instantiate(material[0], new Vector3(i, -4.2f, 0), transform.rotation);
     }
-    private void creatScene(){
+    private void creatScene()
+    {
         for(int i = 0; i < brickNumber; i++)
         {
             var position = allPosition[Random.Range(0, allPosition.Count)];

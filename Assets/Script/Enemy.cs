@@ -23,12 +23,11 @@ public class Enemy : MonoBehaviour
     [SerializeField] private GameObject explode;
     
     private void Awake() {
+        //拿到4個方向坦克的圖片
         sr = GetComponent<SpriteRenderer>();
-        currentDirection = Random.Range(0, 4);    
-    }
-    void Start()
-    {
-        
+
+        //隨機生出場時坦克的方向
+        currentDirection = Random.Range(0, 4); //0:up, 1:right, 2:down, 3:left
     }
 
     void Update()
@@ -58,21 +57,22 @@ public class Enemy : MonoBehaviour
 
     private void Move()
     {
-        if(currentDirection == 0)
+        if(currentDirection == 0) //0:up
         {
             sr.sprite = tankSprite[0];
             bulletEuler = new Vector3(0, 0, 0);
             transform.Translate(0, moveSpace * Time.fixedDeltaTime, 0);
         }else if(currentDirection == 1)
         {
-            sr.sprite = tankSprite[1];
+            sr.sprite = tankSprite[1]; //1:right
             bulletEuler = new Vector3(0, 0, -90);
             transform.Translate(moveSpace * Time.fixedDeltaTime, 0, 0);
-        }else if(currentDirection == 2){
+        }else if(currentDirection == 2) //2:down
+        {
             sr.sprite = tankSprite[2];
             bulletEuler = new Vector3(0, 0, 180);
             transform.Translate(0, -moveSpace * Time.fixedDeltaTime, 0);
-        }else if(currentDirection == 3)
+        }else if(currentDirection == 3) //3:left
         {
             sr.sprite = tankSprite[3];
             bulletEuler = new Vector3(0, 0, 90);
@@ -80,13 +80,13 @@ public class Enemy : MonoBehaviour
         }
     }
 
-    private void ChangeDirection()
+    private void ChangeDirection() //每隔一段時間自動換方向
     {
         currentDirection = Random.Range(0, 4);
         currentDirectionTime = 0;
     }
 
-    private void Attack()
+    private void Attack() //攻擊，依目前坦克的方向發子彈
     {
 
         Instantiate(bullet, transform.position, Quaternion.Euler(transform.eulerAngles + bulletEuler));
@@ -94,7 +94,7 @@ public class Enemy : MonoBehaviour
 
     }
 
-    private void Die()
+    private void Die() //被玩家打到，消失
     {
         Instantiate(explode, transform.position, transform.rotation);
         Destroy(gameObject);
