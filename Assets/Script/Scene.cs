@@ -15,7 +15,7 @@ public class Scene : MonoBehaviour
     [Header("Object")]
     [SerializeField] private GameObject heart;
     [SerializeField] private GameObject[] material;
-    private int randomMaterial;
+
     private List<(float, float)> allPosition = new List<(float, float)>(); 
 
 
@@ -40,8 +40,8 @@ public class Scene : MonoBehaviour
         //randomMaterial = Random.Range(0, 3);
         for(float i = -4.84f; i < -3.88f; i += 0.32f)
         {
-            Instantiate(material[0], new Vector3(-0.5f, i, 0), transform.rotation);
-            Instantiate(material[0], new Vector3(0.5f, i, 0), transform.rotation);
+            Instantiate(material[0], new Vector3(-0.48f, i, 0), transform.rotation);
+            Instantiate(material[0], new Vector3(0.48f, i, 0), transform.rotation);
         }
         for(float i = -0.16f; i < 0.48f; i += 0.32f)
             Instantiate(material[0], new Vector3(i, -4.2f, 0), transform.rotation);

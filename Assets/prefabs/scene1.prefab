@@ -1,6 +1,6 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
---- !u!1 &6393184026622678237
+--- !u!1 &4270534996821491935
 GameObject:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -8,45 +8,42 @@ GameObject:
   m_PrefabAsset: {fileID: 0}
   serializedVersion: 6
   m_Component:
-  - component: {fileID: 7812866014843058720}
-  - component: {fileID: 1580317684375452115}
+  - component: {fileID: 7052187489936635937}
+  - component: {fileID: 6314203826192208254}
   m_Layer: 0
-  m_Name: scene
+  m_Name: scene1
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!4 &7812866014843058720
+--- !u!4 &7052187489936635937
 Transform:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 6393184026622678237}
+  m_GameObject: {fileID: 4270534996821491935}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -0.2753075, y: -0.2196079, z: -0.053723034}
+  m_LocalPosition: {x: -0.23819183, y: 0.025135808, z: -0.05024579}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &1580317684375452115
+--- !u!114 &6314203826192208254
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 6393184026622678237}
+  m_GameObject: {fileID: 4270534996821491935}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: c1239c0fcf4d04f44b84035f62cc1a10, type: 3}
+  m_Script: {fileID: 11500000, guid: 7d06e06f9e51d8342b73b8055d2b73cd, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  brickNumber: 100
-  wallNumber: 20
-  grassNumber: 1
   heart: {fileID: 7246336492746371410, guid: 6d5c3401cd91a374a866eefb6b71eaec, type: 3}
   material:
   - {fileID: 6599442491194426625, guid: 1b786105f48b1ee419a0fb533fd7e6c8, type: 3}

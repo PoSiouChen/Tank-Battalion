@@ -7,7 +7,7 @@ public class Player : MonoBehaviour
 {
     [Header("Value")]
     [SerializeField] private float moveSpace = 4f;
-    [SerializeField] private float limitBulletTime = 0.2f;
+    [SerializeField] private float limitBulletTime = 0.4f;
     private float currentBulletTime = 0;
     private Vector3 bulletEuler;
 
