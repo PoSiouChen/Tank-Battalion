@@ -5,15 +5,15 @@ using UnityEngine;
 public class Born : MonoBehaviour
 {
     [Header("Value")]
-    [SerializeField] private float animationTime = 0.8f;
+    [SerializeField] private float bornTime = 0.8f;
 
     [Header("Object")]
-    [SerializeField] private GameObject player;
+    [SerializeField] private GameObject bornObject;
     void Start()
     {
-        //動畫持續animationTime後，把動畫體換成坦克
-        Invoke("BornTank", animationTime);
-        Destroy(gameObject, animationTime);
+        //動畫持續bornTime後，把動畫體換成坦克
+        Invoke("BornTank", bornTime);
+        Destroy(gameObject, bornTime);
     }
 
     void Update()
@@ -23,6 +23,6 @@ public class Born : MonoBehaviour
 
     private void BornTank() //產生坦克
     {
-        Instantiate(player, transform.position, transform.rotation);
+        Instantiate(bornObject, transform.position, transform.rotation);
     }
 }
