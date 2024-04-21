@@ -23,6 +23,6 @@ public class Born : MonoBehaviour
 
     private void BornTank() //產生坦克
     {
-        Instantiate(bornObject, transform.position, transform.rotation);
+        Instantiate(bornObject, transform.position, transform.rotation, transform);
     }
 }

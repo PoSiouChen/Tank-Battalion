@@ -101,6 +101,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   moveSpace: 3
   limitBulletTime: 0.2
+  isDied: 0
   tankSprite:
   - {fileID: -2141316482, guid: 9d7c74611c8251f4ba21ad8a4bbd5bbd, type: 3}
   - {fileID: -778369399, guid: 9d7c74611c8251f4ba21ad8a4bbd5bbd, type: 3}

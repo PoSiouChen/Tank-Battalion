@@ -10,6 +10,7 @@ public class Player : MonoBehaviour
     [SerializeField] private float limitBulletTime = 0.4f;
     private float currentBulletTime = 0;
     private Vector3 bulletEuler;
+    public bool isDied = false;
 
     
     private SpriteRenderer sr;
@@ -22,13 +23,14 @@ public class Player : MonoBehaviour
     private void Awake() {
         sr = GetComponent<SpriteRenderer>();    
     }
-    void Start()
-    {
-        
-    }
 
     void Update()
     {
+        if (isDied)
+        {
+            Debug.Log("player lost");
+            return;
+        }
         //限制每次發子彈的間隔時間
         if(currentBulletTime >= limitBulletTime)
         {
@@ -72,14 +74,19 @@ public class Player : MonoBehaviour
     {
         if(Input.GetKey(KeyCode.Space))
         {
-            Instantiate(bullet, transform.position, Quaternion.Euler(transform.eulerAngles + bulletEuler));
+            Instantiate(bullet, transform.position, Quaternion.Euler(transform.eulerAngles + bulletEuler), transform);
             currentBulletTime = 0;
         }
     }
 
     private void Die() //被敵人打到
     {
-        Instantiate(explode, transform.position, transform.rotation);
+        Instantiate(explode, transform.position, transform.rotation, transform);
         Destroy(gameObject);
+    }
+
+    public void changePlayerState() //heart被打到
+    {
+        isDied = true;
     }
 }

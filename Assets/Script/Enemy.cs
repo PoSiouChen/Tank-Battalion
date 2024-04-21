@@ -13,7 +13,7 @@ public class Enemy : MonoBehaviour
     private float currentDirectionTime = 0;
     private int currentDirection;
     private Vector3 bulletEuler;
-    private CreatEnemy creatEnemy;
+    private CreateEnemy createEnemy;
     private SpriteRenderer sr;
 
     [Header("Object")]
@@ -25,7 +25,7 @@ public class Enemy : MonoBehaviour
         //拿到4個方向坦克的圖片
         sr = GetComponent<SpriteRenderer>();
 
-        creatEnemy = FindObjectOfType<CreatEnemy>();
+        //createEnemy = FindObjectOfType<CreateEnemy>();
 
         //隨機生出場時坦克的方向
         currentDirection = Random.Range(0, 4); //0:up, 1:right, 2:down, 3:left
@@ -40,8 +40,6 @@ public class Enemy : MonoBehaviour
         {
             currentBulletTime = currentBulletTime + Time.deltaTime;
         }
-
-        
     }
 
     private void FixedUpdate() {
@@ -90,7 +88,7 @@ public class Enemy : MonoBehaviour
     private void Attack() //攻擊，依目前坦克的方向發子彈
     {
 
-        Instantiate(bullet, transform.position, Quaternion.Euler(transform.eulerAngles + bulletEuler));
+        Instantiate(bullet, transform.position, Quaternion.Euler(transform.eulerAngles + bulletEuler), transform);
         currentBulletTime = 0;
 
     }
@@ -98,17 +96,16 @@ public class Enemy : MonoBehaviour
     private void Die() //被玩家打到，消失
     {
         Debug.Log("enemy die");
-        Instantiate(explode, transform.position, transform.rotation);
+        Instantiate(explode, transform.position, transform.rotation, transform);
         Destroy(gameObject);
         
         //生一個新的敵人
-        //Invoke("updateEnemyNumber", 1.5f);
         updateEnemyNumber();
     }
 
     private void updateEnemyNumber()
     {
         //Debug.Log("yes");
-        FindObjectOfType<CreatEnemy>()?.updateEnemyNumber();
+        FindObjectOfType<CreateEnemy>()?.updateEnemyNumber();
     }
 }
