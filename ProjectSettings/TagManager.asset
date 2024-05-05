@@ -12,6 +12,8 @@ TagManager:
   - brick
   - enemy
   - border
+  - slip
+  - background
   layers:
   - Default
   - TransparentFX

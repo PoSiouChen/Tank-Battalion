@@ -6,7 +6,7 @@ public class Scene1 : MonoBehaviour
 {
     [Header("Object")]
     [SerializeField] private GameObject heart;
-    [SerializeField] private GameObject[] material;
+    [SerializeField] private GameObject[] material; //0: brick, 1: grass, 2: water, 3: wall, 4: slip
     [SerializeField] private GameObject bigBrick;
     private float brickWidth = 0.32f;
     private float bigBrickWidth = 0.64f;
@@ -39,6 +39,16 @@ public class Scene1 : MonoBehaviour
     private void creatScene()
     {
         for(float i = -2.14f; i < -2.14f + 4*bigBrickWidth; i += bigBrickWidth)
+        {
+            Instantiate(bigBrick, new Vector3(-1.8f, i, 0), transform.rotation, transform);
+            Instantiate(bigBrick, new Vector3(-3.1f, i, 0), transform.rotation, transform); 
+
+            Instantiate(bigBrick, new Vector3(2.1f, i, 0), transform.rotation, transform);
+            Instantiate(bigBrick, new Vector3(3.4f, i, 0), transform.rotation, transform); 
+            
+        }
+
+        for(float i = 2.6f; i < 2.6f + 3*bigBrickWidth; i += bigBrickWidth)
         {
             Instantiate(bigBrick, new Vector3(-1.8f, i, 0), transform.rotation, transform);
             Instantiate(bigBrick, new Vector3(-3.1f, i, 0), transform.rotation, transform); 

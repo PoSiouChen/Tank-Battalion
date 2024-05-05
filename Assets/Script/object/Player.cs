@@ -6,11 +6,14 @@ using UnityEngine.UIElements.Experimental;
 public class Player : MonoBehaviour
 {
     [Header("Value")]
-    [SerializeField] private float moveSpace = 4f;
     [SerializeField] private float limitBulletTime = 0.4f;
+    [SerializeField] float originalMoveSpace = 3f;
+    private float currentMoveSpace;
     private float currentBulletTime = 0;
     private Vector3 bulletEuler;
     public bool isDied = false;
+    private bool isDefend = true;
+    private float defendTimeval;
     private LostAction LostAction;
 
     
@@ -20,13 +23,22 @@ public class Player : MonoBehaviour
     [SerializeField] private Sprite[] tankSprite; //up: tnaks_0, right: tnaks_0, down: tnaks_0, left: tnaks_6
     [SerializeField] private GameObject bullet;
     [SerializeField] private GameObject explode;
-    
+    [SerializeField] private GameObject defend; 
     private void Awake() {
         sr = GetComponent<SpriteRenderer>();    
+        currentMoveSpace = originalMoveSpace;
     }
 
     void Update()
     {
+        if(isDefend){
+            defend.SetActive(true);
+            defendTimeval -= Time.deltaTime;
+            if(defendTimeval <= 0){
+                isDefend = false;
+                defend.SetActive(false);
+            }
+        }
         if (isDied)
         {
             Debug.Log("player lost");
@@ -53,22 +65,22 @@ public class Player : MonoBehaviour
         {
             sr.sprite = tankSprite[0];
             bulletEuler = new Vector3(0, 0, 0);
-            transform.Translate(0, moveSpace * Time.fixedDeltaTime, 0);
+            transform.Translate(0, currentMoveSpace * Time.fixedDeltaTime, 0);
         }else if(Input.GetKey(KeyCode.RightArrow))
         {
             sr.sprite = tankSprite[1];
             bulletEuler = new Vector3(0, 0, -90);
-            transform.Translate(moveSpace * Time.fixedDeltaTime, 0, 0);
+            transform.Translate(currentMoveSpace * Time.fixedDeltaTime, 0, 0);
         }else if(Input.GetKey(KeyCode.DownArrow))
         {
             sr.sprite = tankSprite[2];
             bulletEuler = new Vector3(0, 0, 180);
-            transform.Translate(0, -moveSpace * Time.fixedDeltaTime, 0);
+            transform.Translate(0, -currentMoveSpace * Time.fixedDeltaTime, 0);
         }else if(Input.GetKey(KeyCode.LeftArrow))
         {
             sr.sprite = tankSprite[3];
             bulletEuler = new Vector3(0, 0, 90);
-            transform.Translate(-moveSpace * Time.fixedDeltaTime, 0, 0);
+            transform.Translate(-currentMoveSpace * Time.fixedDeltaTime, 0, 0);
         }
     }
 
@@ -83,6 +95,9 @@ public class Player : MonoBehaviour
 
     private void Die() //被敵人打到
     {
+        if(isDefend){
+            return;
+        }
         Instantiate(explode, transform.position, transform.rotation, transform);
         Destroy(gameObject);
     }
@@ -90,5 +105,20 @@ public class Player : MonoBehaviour
     public void changePlayerState() //heart被打到
     {
         isDied = true;
+    }
+    private void OnTriggerEnter2D(Collider2D collision) //進入打滑的地板
+    {
+        if(collision.tag == "slip")
+        {
+            currentMoveSpace = originalMoveSpace * 2;
+        }
+    }
+
+    private void OnTriggerExit2D(Collider2D collision) //離開打滑的地板
+    {
+        if(collision.tag == "slip")
+        {
+            currentMoveSpace = originalMoveSpace;
+        }
     }
 }

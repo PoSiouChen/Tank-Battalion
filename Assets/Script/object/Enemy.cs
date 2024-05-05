@@ -6,9 +6,10 @@ using UnityEngine.UIElements.Experimental;
 public class Enemy : MonoBehaviour
 {
     [Header("Value")]
-    [SerializeField] private float moveSpace = 1f;
+    [SerializeField] private float originalMoveSpace = 1f;
     [SerializeField] private float limitBulletTime = 0.2f;
     [SerializeField] private float limitDirectionTime = 3f;
+    private float currentMoveSpace;
     private float currentBulletTime = 0;
     private float currentDirectionTime = 0;
     private int currentDirection;
@@ -29,6 +30,8 @@ public class Enemy : MonoBehaviour
 
         //隨機生出場時坦克的方向
         currentDirection = Random.Range(0, 4); //0:up, 1:right, 2:down, 3:left
+
+        currentMoveSpace = originalMoveSpace;
     }
 
     void Update()
@@ -60,22 +63,22 @@ public class Enemy : MonoBehaviour
         {
             sr.sprite = tankSprite[0];
             bulletEuler = new Vector3(0, 0, 0);
-            transform.Translate(0, moveSpace * Time.fixedDeltaTime, 0);
+            transform.Translate(0, currentMoveSpace * Time.fixedDeltaTime, 0);
         }else if(currentDirection == 1)
         {
             sr.sprite = tankSprite[1]; //1:right
             bulletEuler = new Vector3(0, 0, -90);
-            transform.Translate(moveSpace * Time.fixedDeltaTime, 0, 0);
+            transform.Translate(currentMoveSpace * Time.fixedDeltaTime, 0, 0);
         }else if(currentDirection == 2) //2:down
         {
             sr.sprite = tankSprite[2];
             bulletEuler = new Vector3(0, 0, 180);
-            transform.Translate(0, -moveSpace * Time.fixedDeltaTime, 0);
+            transform.Translate(0, -currentMoveSpace * Time.fixedDeltaTime, 0);
         }else if(currentDirection == 3) //3:left
         {
             sr.sprite = tankSprite[3];
             bulletEuler = new Vector3(0, 0, 90);
-            transform.Translate(-moveSpace * Time.fixedDeltaTime, 0, 0);
+            transform.Translate(-currentMoveSpace * Time.fixedDeltaTime, 0, 0);
         }
     }
 
@@ -95,7 +98,7 @@ public class Enemy : MonoBehaviour
 
     private void Die() //被玩家打到，消失
     {
-        Debug.Log("enemy die");
+        //Debug.Log("enemy die");
         Instantiate(explode, transform.position, transform.rotation, transform);
         Destroy(gameObject);
         
@@ -105,7 +108,23 @@ public class Enemy : MonoBehaviour
 
     private void updateEnemyNumber()
     {
-        //Debug.Log("yes");
+        //Debug.Log("new enemy");
         FindObjectOfType<CreateEnemy>()?.updateEnemyNumber();
+    }
+
+        private void OnTriggerEnter2D(Collider2D collision) //進入打滑的地板
+    {
+        if(collision.tag == "slip")
+        {
+            currentMoveSpace = originalMoveSpace * 2;
+        }
+    }
+
+    private void OnTriggerExit2D(Collider2D collision) //離開打滑的地板
+    {
+        if(collision.tag == "slip")
+        {
+            currentMoveSpace = originalMoveSpace;
+        }
     }
 }

@@ -1,0 +1,26 @@
+
+Scripts
+¢x     
+¢u¢wanimation
+¢x      Born.cs
+¢x      Explode.cs
+¢x      
+¢u¢wgameManage
+¢x      CreateEnemy.cs
+¢x      Scene1.cs
+¢x      SceneHendle.cs
+¢x      
+¢u¢wobject
+¢x      Bullet.cs
+¢x      Enemy.cs
+¢x      Heart.cs
+¢x      Player.cs
+¢x      
+¢|¢wpanel
+        LostAction.cs
+        PauseAction.cs
+        WinAction.cs
+        
+
+
+
