@@ -25,6 +25,13 @@ public class Bullet : MonoBehaviour
                     Destroy(gameObject);
                 }
                 break;
+            case "Player":
+                if(!isPlayerBullet)
+                {
+                    collision.SendMessage("Die");
+                    Destroy(gameObject);
+                }
+                break;
             case "grass":
                 break;
             case "water":

@@ -99,9 +99,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 16c7b81e8e4380648b03d3040ed6d9e5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  moveSpace: 1
+  originalMoveSpace: 1
   limitBulletTime: 3
-  limitDirectionTime: 3
+  limitDirectionTime: 0.5
   tankSprite:
   - {fileID: -800121357, guid: 9d7c74611c8251f4ba21ad8a4bbd5bbd, type: 3}
   - {fileID: 354242949, guid: 9d7c74611c8251f4ba21ad8a4bbd5bbd, type: 3}

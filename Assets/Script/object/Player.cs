@@ -14,7 +14,6 @@ public class Player : MonoBehaviour
     public bool isDied = false;
     private bool isDefend = true;
     private float defendTimeval;
-    private LostAction LostAction;
 
     
     private SpriteRenderer sr;
@@ -43,11 +42,12 @@ public class Player : MonoBehaviour
         {
             Debug.Log("player lost");
             FindObjectOfType<LostAction>()?.ActiveLostPanel();
-            return;
+            
         }
         //限制每次發子彈的間隔時間
         if(currentBulletTime >= limitBulletTime)
         {
+            Debug.Log(currentBulletTime);
             Attack();
         }else
         {
@@ -99,7 +99,7 @@ public class Player : MonoBehaviour
             return;
         }
         Instantiate(explode, transform.position, transform.rotation, transform);
-        Destroy(gameObject);
+        //Destroy(gameObject);
     }
 
     public void changePlayerState() //heart被打到

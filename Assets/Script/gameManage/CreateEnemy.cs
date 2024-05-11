@@ -10,7 +10,7 @@ public class CreateEnemy : MonoBehaviour
     private float[] xPositionRange = new float[] {-3.9f, 3.9f}; 
     private float yPositionRange = 3.2f;
     private float xPosition, yPosition;
-    private WinAction WinAction;
+
     void Start()
     {
         currentEnemy = numberOfEnemy;
@@ -34,7 +34,7 @@ public class CreateEnemy : MonoBehaviour
         }
         Debug.Log(currentEnemy);
     }
-    private void newEnemy()
+    private void newEnemy() //隨機位置產生新敵人
     {
         xPosition = Random.Range(xPositionRange[0], xPositionRange[1]);
         yPosition = yPositionRange;

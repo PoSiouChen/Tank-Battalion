@@ -8,11 +8,11 @@ public class Enemy : MonoBehaviour
     [Header("Value")]
     [SerializeField] private float originalMoveSpace = 1f;
     [SerializeField] private float limitBulletTime = 0.2f;
-    [SerializeField] private float limitDirectionTime = 3f;
+    [SerializeField] private float limitDirectionTime = 1f;
     private float currentMoveSpace;
     private float currentBulletTime = 0;
     private float currentDirectionTime = 0;
-    private int currentDirection;
+    private int currentDirection; //0:up, 1:right, 2:down, 3:left
     private Vector3 bulletEuler;
     private CreateEnemy createEnemy;
     private SpriteRenderer sr;
@@ -21,17 +21,20 @@ public class Enemy : MonoBehaviour
     [SerializeField] private Sprite[] tankSprite; //up: tnaks_274, right: tnaks_276, down: tnaks_278, left: tnaks_280
     [SerializeField] private GameObject bullet;
     [SerializeField] private GameObject explode;
+
+    private Transform player;
+    private Transform enemy;
+    private float playerX, playerY; 
+    private float enemyX, enemyY; 
+
     
     private void Awake() {
         //拿到4個方向坦克的圖片
         sr = GetComponent<SpriteRenderer>();
 
-        //createEnemy = FindObjectOfType<CreateEnemy>();
-
-        //隨機生出場時坦克的方向
-        currentDirection = Random.Range(0, 4); //0:up, 1:right, 2:down, 3:left
-
         currentMoveSpace = originalMoveSpace;
+        player = GameObject.FindGameObjectWithTag("Player").transform;
+        enemy = GetComponent<Transform>();
     }
 
     void Update()
@@ -48,7 +51,13 @@ public class Enemy : MonoBehaviour
     private void FixedUpdate() {
         if(currentDirectionTime >= limitDirectionTime)
         {
-            ChangeDirection();
+            if (Random.Range(0, 2) == 0)
+            {
+                trackPlayerX();
+            } else
+            {
+                trackPlayerY();
+            }
             Move();
         }else
         {
@@ -82,12 +91,13 @@ public class Enemy : MonoBehaviour
         }
     }
 
+    /*
     private void ChangeDirection() //每隔一段時間自動換方向
     {
         currentDirection = Random.Range(0, 4);
         currentDirectionTime = 0;
     }
-
+    */
     private void Attack() //攻擊，依目前坦克的方向發子彈
     {
 
@@ -126,5 +136,35 @@ public class Enemy : MonoBehaviour
         {
             currentMoveSpace = originalMoveSpace;
         }
+    }
+
+    private void trackPlayerX()
+    {
+        playerX = player.position.x;
+        enemyX = enemy.position.x;
+
+        if(playerX > enemyX)
+        {
+            currentDirection = 1;
+        } else
+        {
+            currentDirection = 3;
+        }
+        currentDirectionTime = 0;
+    }
+
+    private void trackPlayerY()
+    {
+        playerY = player.position.y;
+        enemyY = enemy.position.y;
+
+        if(playerY > enemyY)
+        {
+            currentDirection = 0;
+        } else
+        {
+            currentDirection = 2;
+        }
+        currentDirectionTime = 0;
     }
 }
