@@ -16,11 +16,6 @@ public class CreateEnemy : MonoBehaviour
         currentEnemy = numberOfEnemy;
     }
 
-    void Update()
-    {
-        
-    }
-
     public void updateEnemyNumber()
     {
         currentEnemy -= 1;

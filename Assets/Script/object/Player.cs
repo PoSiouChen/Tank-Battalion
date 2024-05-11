@@ -7,13 +7,14 @@ public class Player : MonoBehaviour
 {
     [Header("Value")]
     [SerializeField] private float limitBulletTime = 0.4f;
-    [SerializeField] float originalMoveSpace = 3f;
+    [SerializeField] private float originalMoveSpace = 3f;
+    [SerializeField] private float defendTime = 1f;
     private float currentMoveSpace;
     private float currentBulletTime = 0;
     private Vector3 bulletEuler;
     public bool isDied = false;
     private bool isDefend = true;
-    private float defendTimeval;
+    
 
     
     private SpriteRenderer sr;
@@ -32,8 +33,8 @@ public class Player : MonoBehaviour
     {
         if(isDefend){
             defend.SetActive(true);
-            defendTimeval -= Time.deltaTime;
-            if(defendTimeval <= 0){
+            defendTime -= Time.deltaTime;
+            if(defendTime <= 0){
                 isDefend = false;
                 defend.SetActive(false);
             }
