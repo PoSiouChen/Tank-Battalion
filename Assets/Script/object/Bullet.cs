@@ -8,6 +8,9 @@ public class Bullet : MonoBehaviour
     [SerializeField] private float moveSpace = 10f;
     [SerializeField] private bool isPlayerBullet = true;
 
+    [Header("Object")]
+    [SerializeField] private GameObject explode;
+
     void Update()
     {
         transform.Translate(transform.up * moveSpace * Time.deltaTime, Space.World);
@@ -21,6 +24,7 @@ public class Bullet : MonoBehaviour
             case "tank":
                 if(!isPlayerBullet)
                 {
+                    Instantiate(explode, transform.position, transform.rotation, transform);
                     collision.SendMessage("Die");
                     Destroy(gameObject);
                 }
@@ -28,7 +32,8 @@ public class Bullet : MonoBehaviour
             case "Player":
                 if(!isPlayerBullet)
                 {
-                    collision.SendMessage("Die");
+                    Instantiate(explode, transform.position, transform.rotation, transform);
+                    collision.SendMessage("Die"); 
                     Destroy(gameObject);
                 }
                 break;
@@ -37,11 +42,13 @@ public class Bullet : MonoBehaviour
             case "water":
                 break;
             case "wall":
-                Destroy(gameObject);
+                Instantiate(explode, transform.position, transform.rotation, transform);
+                Destroy(gameObject, 0.01f);
                 break;
             case "brick":
+                Instantiate(explode, transform.position, transform.rotation, transform);
                 Destroy(collision.gameObject);
-                Destroy(gameObject);
+                Destroy(gameObject, 0.01f);
                 break;
             case "enemy":
                 if(isPlayerBullet)
@@ -52,10 +59,11 @@ public class Bullet : MonoBehaviour
                 break;
             case "heart":
                 collision.SendMessage("Die");
-                Destroy(gameObject);
+                Destroy(gameObject, 0.01f);
                 break;
             case "border":
-                Destroy(gameObject);
+                Instantiate(explode, transform.position, transform.rotation, transform);
+                Destroy(gameObject, 0.01f);
                 break;
         }
     }

@@ -9,7 +9,7 @@ public class Scene1 : MonoBehaviour
     [SerializeField] private GameObject[] material; //0: brick, 1: grass, 2: water, 3: wall, 4: slip
     [SerializeField] private GameObject bigBrick;
     private float brickWidth = 0.32f;
-    private float bigBrickWidth = 0.64f;
+    private float bigBrickWidth = 0.64f, grassWidth = 0.57f;
     private void Awake() 
     {
         creatHeart();
@@ -57,6 +57,19 @@ public class Scene1 : MonoBehaviour
             Instantiate(bigBrick, new Vector3(3.4f, i, 0), transform.rotation, transform); 
             
         }
+
+        for(float i = -1.20f; i < -1.20f + 4*grassWidth; i += grassWidth)
+        {
+            Instantiate(material[1], new Vector3(-0.68f, i, 0), transform.rotation, transform); //grass
+            Instantiate(material[4], new Vector3(-0.09f, i, 0), transform.rotation, transform); //slip
+            Instantiate(material[4], new Vector3(0.5f, i, 0), transform.rotation, transform); //slip
+        }   
+
+        for(float i = -2.68f; i < -2.68f + 4*grassWidth; i += grassWidth)
+        {
+            Instantiate(material[2], new Vector3(i, 1.64f, 0), transform.rotation, transform); //water
+        }
+        
         
     }
 

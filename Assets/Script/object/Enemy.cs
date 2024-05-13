@@ -100,17 +100,15 @@ public class Enemy : MonoBehaviour
     */
     private void Attack() //攻擊，依目前坦克的方向發子彈
     {
-
         Instantiate(bullet, transform.position, Quaternion.Euler(transform.eulerAngles + bulletEuler), transform);
         currentBulletTime = 0;
-
     }
 
     private void Die() //被玩家打到，消失
     {
         //Debug.Log("enemy die");
         Instantiate(explode, transform.position, transform.rotation, transform);
-        Destroy(gameObject);
+        Destroy(gameObject, 0.01f);
         
         //生一個新的敵人
         updateEnemyNumber();

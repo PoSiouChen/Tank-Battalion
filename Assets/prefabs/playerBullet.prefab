@@ -146,6 +146,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   moveSpace: 10
   isPlayerBullet: 1
+  explode: {fileID: 3620741539794295937, guid: 61393ca2891a30d4dbb1b48410566f58, type: 3}
 --- !u!50 &-5012279441515414567
 Rigidbody2D:
   serializedVersion: 4

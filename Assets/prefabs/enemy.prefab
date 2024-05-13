@@ -108,7 +108,7 @@ MonoBehaviour:
   - {fileID: -504572142, guid: 9d7c74611c8251f4ba21ad8a4bbd5bbd, type: 3}
   - {fileID: -448135279, guid: 9d7c74611c8251f4ba21ad8a4bbd5bbd, type: 3}
   bullet: {fileID: 3060251390084865579, guid: a7634590e9d6c4048a0e4ec599383d6f, type: 3}
-  explode: {fileID: 2726411469442058076, guid: 4a950279c48d53f4cbcf6d0600d51b63, type: 3}
+  explode: {fileID: 3620741539794295937, guid: 61393ca2891a30d4dbb1b48410566f58, type: 3}
 --- !u!61 &3190105281271134975
 BoxCollider2D:
   m_ObjectHideFlags: 0

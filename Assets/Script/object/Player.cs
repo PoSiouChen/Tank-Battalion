@@ -48,7 +48,6 @@ public class Player : MonoBehaviour
         //限制每次發子彈的間隔時間
         if(currentBulletTime >= limitBulletTime)
         {
-            Debug.Log(currentBulletTime);
             Attack();
         }else
         {
@@ -98,6 +97,9 @@ public class Player : MonoBehaviour
     {
         if(isDefend){
             return;
+        } else
+        {
+            isDied = true;
         }
         Instantiate(explode, transform.position, transform.rotation, transform);
         //Destroy(gameObject);
